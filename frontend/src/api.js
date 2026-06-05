@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000/api";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000/api" || "https://iceye-flood-management-demo.onrender.com";
 
 export const api = {
   health: () => axios.get(`${API_BASE}/health/`).then(res => res.data),
