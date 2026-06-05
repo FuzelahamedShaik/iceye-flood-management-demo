@@ -4,26 +4,35 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "local-demo-secret-key"
 DEBUG = True
-ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = [
+    "iceye-flood-management-demo.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 INSTALLED_APPS = [
+    "corsheaders",
+    "rest_framework",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
-    "corsheaders",
+
     "flood",
 ]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -63,9 +72,20 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "https://fuzelahamedshaik.github.io",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://fuzelahamedshaik.github.io",
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
@@ -73,13 +93,3 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.BrowsableAPIRenderer",
     ]
 }
-
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-CORS_ALLOWED_ORIGINS = [
-    "https://FuzelahamedShaik.github.io",
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://FuzelahamedShaik.github.io",
-]
